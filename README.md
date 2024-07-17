@@ -23,7 +23,7 @@ struct ContentView: View {
 }
 ```
 
-ただ実際は modifier(AppTextStyle()) と書く手間を省略するために次のように extension を用意することが多いです。
+ただ実際は `modifier(AppTextStyle())` と書く手間を省略するために次のように extension を用意することが多いです。
 
 ```swift
 extension View {
@@ -53,8 +53,8 @@ extension View {
 }
 ```
 
-ただ、extension では @State, @Environment などが持てないため、それらを使う場合はカスタム Modifier を使うのが良いです。
+ただ、extension では `@State`, `@Environment` などが持てないため、それらを使う場合はカスタム Modifier を使うのが良いです。
 まとめると
-* @State, @Environment を使うならカスタムの ViewModifier を作成する
+* `@State`, `@Environment` を使うならカスタムの ViewModifier を作成する
 * それ以外の場合は extension で済ませる
 となります。
