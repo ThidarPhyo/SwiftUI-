@@ -2,12 +2,13 @@
 
 
 ## 概要
-SwiftUI では font や foregroundColor, padding など様々な Modifier が用意されていますがカスタムの Modifier を作成することもできます。
+In SwiftUI, various modifiers such as font, foregroundColor, padding, and more are provided, but you can also create custom modifiers.
+
 ```swift
-// ✅ ViewModifier を実装するだけ
+// ✅ Implement a ViewModifier
 struct AppTextStyle: ViewModifier {
     
-    // ここで View のカスタマイズを行う
+    // customizations View
     func body(content: Content) -> some View {
         content
             .font(.system(size: 14))
@@ -18,12 +19,12 @@ struct AppTextStyle: ViewModifier {
 struct ContentView: View {
     var body: some View {
         Text("Text")
-            .modifier(AppTextStyle()) // Modifier を適用
+            .modifier(AppTextStyle()) // Apply Modifier
     }
 }
 ```
 
-ただ実際は `modifier(AppTextStyle())` と書く手間を省略するために次のように extension を用意することが多いです。
+In practice, to avoid writing `modifier(AppTextStyle())` every time, it's common to define extensions like the following.
 
 ```swift
 extension View {
@@ -40,12 +41,11 @@ struct ContentView: View {
     }
 }
 ```
-こうなると単に extension で View をカスタマイズするのとあまり変わりません。
+In that case, it's not much different from simply customizing a View using extensions.
 
 ```swift
 extension View {
     
-    // これでいいじゃん
     func appTextStyle() -> some View {
         font(.system(size: 14))
             .foregroundStyle(Color.appTextColor)
@@ -53,8 +53,9 @@ extension View {
 }
 ```
 
-ただ、extension では `@State`, `@Environment` などが持てないため、それらを使う場合はカスタム Modifier を使うのが良いです。
-まとめると
-* `@State`, `@Environment` を使うならカスタムの ViewModifier を作成する
-* それ以外の場合は extension で済ませる
-となります。
+In SwiftUI, extensions cannot have properties like `@State` or `@Environment`. Therefore, it's preferable to use custom ViewModifiers when you need to use those features.
+
+To summarize:
+
+* Create a custom ViewModifier when using `@State` or `@Environment`.
+* Use extensions for other cases.
