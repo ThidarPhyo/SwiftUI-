@@ -3,4 +3,4 @@
 
 ## List
 
-- [ViewModifier](./Exercise/ViewModifier/README.md)
+- [ViewModifier](./Exercise/README.md)
